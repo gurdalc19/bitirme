@@ -9,11 +9,11 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <a
           className="App-link"
-          href="https://gitlab.com"
+          href="https://avesis.itu.edu.tr/ozemir"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn GitLab CI
+          Cihangir Hoca Bitirme
         </a>
       </header>
     </div>
