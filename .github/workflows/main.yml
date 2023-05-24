@@ -1,29 +1,25 @@
-name: Build and Push Image to Google Cloud Platform
-on:
-  push:
-    branches: [ main ]
+name: Push to GCR GitHub Action
+on: [push]
 jobs:
-  build-push-gcr:
-    name: Build and Push to GCP
+  build-and-push-to-gcr:
     runs-on: ubuntu-latest
-    env:
-      IMAGE_NAME: bitirme_img
-      PROJECT_ID: bitirme-387623
-      IMAGE_TAG: ${{github.run_number}}
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3
-
-    - id: 'auth'
-      name: 'Authenticate to Google Cloud'
-      uses: 'google-github-actions/auth@v1'
-      with:
-        credentials_json: '${{ secrets.SERVICE_ACCOUNT_KEY }}'
-
-    - name: Build Docker Image
-      run: docker build -t gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG .
-
-    - name: Push Docker Image to Container Registry (GCR)
-      run: |-
-        docker push gcr.io/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:      
+      - uses: actions/checkout@v3
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v0
+        with:
+          service_account: github-actions@bitirme-387623.iam.gserviceaccount.com
+      - uses: RafikFarhad/push-to-gcr-github-action@v5-beta
+        with:
+          gcloud_service_key: ${{ secrets.SERVICE_ACCOUNT_KEY }} # can be base64 encoded or plain text || not needed if you use google-github-actions/auth
+          registry: gcr.io
+          project_id: bitirme-387623
+          image_name: bitirme
+          image_tag: ${{github.run_number}}
+          dockerfile: ./Dockerfile
+          context: .
 
