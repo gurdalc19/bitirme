@@ -6,4 +6,4 @@ RUN yarn install && \
     yarn lint && \
     yarn build
 CMD [ "npm", "start" ]
-EXPOSE 8080
+EXPOSE 3000
