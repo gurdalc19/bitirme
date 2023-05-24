@@ -21,7 +21,7 @@ jobs:
         uses: google-github-actions/auth@v1.1.1
         with:
           token_format: access_token
-          workload_identity_provider: projects/1073061871476/locations/global/workloadIdentityPools/bitirme-pool
+          workload_identity_provider: bitirme-pool
           service_account: bitirme-sa@bitirme-387623.iam.gserviceaccount.com
           access_token_lifetime: 300s
 
