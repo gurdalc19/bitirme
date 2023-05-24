@@ -40,4 +40,15 @@ jobs:
           tags: |
              us-west1-docker.pkg.dev/bitirme-387623/bitirme/bitirme_img:${{github.run_number}}
              
+      - name: Trigger Second Workflow
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          repository: gurdalc19/bitirme_manifast
+          event-type: second-workflow
+          client-payload: |
+            {
+              "version": "${{github.run_number}}"
+            }             
+             
 
