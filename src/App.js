@@ -13,7 +13,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Cihangir Özemir Hoca Bitirme
+          Cihangir Özemir Bitirme
         </a>
       </header>
     </div>
